@@ -1,0 +1,19 @@
+@page
+@model PeopleModel
+
+<h1>People</h1>
+<ol>
+	@foreach (var name in Model.Names)
+	{
+		<li>
+			@if (name == "Ringo")
+			{
+				<em>@name</em>
+			}
+			else
+			{
+				@name
+			}
+		</li>
+	}
+</ol>
