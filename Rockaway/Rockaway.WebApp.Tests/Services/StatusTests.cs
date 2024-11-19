@@ -2,6 +2,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Rockaway.WebApp.Services;
+using Shouldly;
 
 namespace Rockaway.WebApp.Tests.Services;
 
@@ -41,8 +42,8 @@ public class StatusTests {
 		using var client = factory.CreateClient();
 		var json = await client.GetStringAsync("/status");
 		var status = JsonSerializer.Deserialize<ServerStatus>(json, jsonSerializerOptions);
-		Assert.NotNull(status);
-		// WORKS ON MY MACHINE!
-		Assert.Equal(testStatus.Hostname, status.Hostname);
+		status.ShouldNotBeNull();
+		// status.Hostname.ShouldBe("TEST_HОST");
+		testStatus.ShouldBeEquivalentTo(status);
 	}
 }
