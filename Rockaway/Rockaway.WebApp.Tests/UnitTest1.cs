@@ -1,8 +1,13 @@
+using Microsoft.AspNetCore.Mvc;
+using Rockaway.WebApp.Controllers;
+
 namespace Rockaway.WebApp.Tests;
 
-public class UnitTest1 {
+public class GreetingControllerTests {
 	[Fact]
-	public void Test1() {
-
+	public void GreetingController_Index_Returns_View() {
+		var c = new GreetingController();
+		var result = c.Index() as ViewResult;
+		Assert.NotNull(result);
 	}
 }

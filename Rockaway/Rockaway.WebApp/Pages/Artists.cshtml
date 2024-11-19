@@ -1,5 +1,6 @@
 @page
 @model ArtistsModel
+<h1>Artists</h1>
 <article class="artist-gallery">
 	@foreach (var artist in Model.Artists.OrderBy(a => a.Name)) {
 		<section>
