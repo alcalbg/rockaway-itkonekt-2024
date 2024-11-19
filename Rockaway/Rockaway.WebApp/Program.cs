@@ -24,6 +24,10 @@ builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true
 
 builder.Services.AddTransient<IStatusReporter, StatusReporter>();
 
+#if DEBUG
+builder.Services.AddSassCompiler();
+#endif
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
