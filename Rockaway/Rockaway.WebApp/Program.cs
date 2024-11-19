@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Rockaway.WebApp.Data;
+using Rockaway.WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,9 @@ sqliteConnection.Open();
 builder.Services.AddDbContext<RockawayDbContext>(options => options.UseSqlite(sqliteConnection));
 builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<RockawayDbContext>();
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+
+builder.Services.AddTransient<IStatusReporter, StatusReporter>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -50,5 +54,8 @@ app.MapAreaControllerRoute(
 ).RequireAuthorization();
 app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 app.MapControllers();
+
+app.MapGet("/status", (IStatusReporter reporter) => reporter.GetStatus());
+
 app.Run();
 ILogger<T> CreateAdHocLogger<T>() => LoggerFactory.Create(lb => lb.AddConsole()).CreateLogger<T>();
