@@ -7,23 +7,22 @@ var options = new BoundedChannelOptions(CAPACITY) {
 };
 var channel = Channel.CreateBounded<Func<Task>>(options);
 
-await Task.WhenAll(
-	PullThingsOutOfChannel(),
-	PushThingsIntoChannelAsync()
-);
+
+
+await Task.WhenAll(PushThingsIntoChannelAsync(), PullThingsOutOfChannel());
 
 async Task PushThingsIntoChannelAsync() {
 	sw.Start();
-	const int TASK_COUNT = 20;
+	const int TASK_COUNT = 50;
 	for (var i = 0; i < TASK_COUNT; i++) {
 		var localI = i;
 		var task = async () => {
-			await Task.Delay(TimeSpan.FromMilliseconds(50));
+			await Task.Delay(TimeSpan.FromMilliseconds(500));
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine($"Task {localI} completed");
 		};
 		await channel.Writer.WriteAsync(task);
-		await Task.Delay(TimeSpan.FromMilliseconds(500));
+		// await Task.Delay(TimeSpan.FromMilliseconds(500));
 		Console.ForegroundColor = ConsoleColor.Red;
 		Console.WriteLine($"Task {i} added to the channel");
 	}
