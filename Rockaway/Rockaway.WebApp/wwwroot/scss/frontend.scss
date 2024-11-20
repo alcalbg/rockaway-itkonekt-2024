@@ -37,3 +37,14 @@ $primary: #39f;
 @import "../lib/bootstrap/scss/utilities/api";
 
 // 8. Add additional custom code here
+
+section.artist-card {
+	clear: both;
+	div img {
+		width: 160px;
+		height: 160px;
+		float: left;
+		margin: 16px;
+		border-radius: 8px;
+	}
+}

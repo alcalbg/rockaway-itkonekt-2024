@@ -8,13 +8,18 @@
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="~/css/frontend.css" asp-append-version="true" />
 	@await RenderSectionAsync("Head", required: false)
+	<base href="~/" />
 </head>
 <body>
-@RenderBody()
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)
+	@RenderBody()
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+
+	<!-- Required for Razor Component support -->
+	<script src="_framework/blazor.web.js"></script>
+
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>

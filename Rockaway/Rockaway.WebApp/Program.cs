@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Rockaway.WebApp.Data;
 using Rockaway.WebApp.Services;
+using Rockaway.WebApp.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,10 @@ builder.Services.AddTransient<IStatusReporter, StatusReporter>();
 #if DEBUG
 builder.Services.AddSassCompiler();
 #endif
+
+
+builder.Services.AddRazorComponents()
+	.AddInteractiveServerComponents();
 
 var app = builder.Build();
 
@@ -60,6 +65,10 @@ app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 app.MapControllers();
 
 app.MapGet("/status", (IStatusReporter reporter) => reporter.GetStatus());
+
+app.MapRazorComponents<TicketPicker>()
+	.AddInteractiveServerRenderMode();
+
 
 app.Run();
 ILogger<T> CreateAdHocLogger<T>() => LoggerFactory.Create(lb => lb.AddConsole()).CreateLogger<T>();
