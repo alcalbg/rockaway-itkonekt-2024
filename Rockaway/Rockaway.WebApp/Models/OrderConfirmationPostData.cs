@@ -18,6 +18,7 @@ public class OrderConfirmationPostData {
 	[Description("Your email address")]
 	public string CustomerEmail { get; set; } = String.Empty;
 
+	[MustBeTrue(ErrorMessage = "You must agree to pay on the door")]
 	public bool AgreeToPayment { get; set; }
 
 	public Guid TicketOrderId { get; set; }
