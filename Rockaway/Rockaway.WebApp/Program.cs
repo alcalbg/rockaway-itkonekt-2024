@@ -3,6 +3,9 @@ using Microsoft.Data.Sqlite;
 using Rockaway.WebApp.Data;
 using Rockaway.WebApp.Services;
 using Rockaway.WebApp.Components;
+using Mjml.Net;
+using RazorEngineCore;
+using Rockaway.WebApp.Services.Mail;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +35,12 @@ builder.Services.AddSassCompiler();
 
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents();
+
+
+builder.Services.AddSingleton<IMailTemplateProvider>(new ResourceMailTemplateProvider());
+builder.Services.AddSingleton<IMailBodyRenderer, MailBodyRenderer>();
+builder.Services.AddSingleton<IRazorEngine, RazorEngine>();
+builder.Services.AddSingleton<IMjmlRenderer, MjmlRenderer>();
 
 var app = builder.Build();
 

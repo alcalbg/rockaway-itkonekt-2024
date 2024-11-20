@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Razor.Language;
 using Rockaway.WebApp.Models;
 
 namespace Rockaway.WebApp.Services.Mail;
