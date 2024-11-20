@@ -38,6 +38,10 @@ $primary: #39f;
 
 // 8. Add additional custom code here
 
+@import '../lib/fontawesome/scss/fontawesome.scss';
+@import '../lib/fontawesome/scss/solid.scss';
+@import '../lib/fontawesome/scss/brands.scss';
+
 section.artist-card {
 	clear: both;
 	div img {

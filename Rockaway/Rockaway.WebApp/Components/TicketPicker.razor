@@ -18,9 +18,9 @@
 			</span>
 		</div>
 		<div class="col-3 col-md-2">
-			<a class="fas fa-square-minus" @onclick="() => Decrement(tt.Id)">down</a>
+			<a class="fas fa-square-minus" @onclick="() => Decrement(tt.Id)"></a>
 			<input name="tickets[@tt.Id]" type="number" value="@quantities[tt.Id]" />
-			<a class="fas fa-square-plus" @onclick="() => Increment(tt.Id)">up</a>
+			<a class="fas fa-square-plus" @onclick="() => Increment(tt.Id)"></a>
 		</div>
 		<div class="col-3 col-md-2">
 			@Format(LineTotal(tt))
