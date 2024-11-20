@@ -42,6 +42,12 @@ builder.Services.AddSingleton<IMailBodyRenderer, MailBodyRenderer>();
 builder.Services.AddSingleton<IRazorEngine, RazorEngine>();
 builder.Services.AddSingleton<IMjmlRenderer, MjmlRenderer>();
 
+builder.Services.AddSingleton<IMailSender, SmtpMailSender>();
+var smtpSettings = new SmtpSettings();
+builder.Configuration.Bind("Smtp", smtpSettings);
+builder.Services.AddSingleton(smtpSettings);
+builder.Services.AddSingleton<ISmtpRelay, SmtpRelay>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
